@@ -1,0 +1,14 @@
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.exe
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.deps.json
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.runtimeconfig.json
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.runtimeconfig.dev.json
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.dll
+C:\5by5\Exercicio-9\bin\Debug\netcoreapp3.1\Exercicio-9.pdb
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.csproj.AssemblyReference.cache
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.GeneratedMSBuildEditorConfig.editorconfig
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.AssemblyInfoInputs.cache
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.AssemblyInfo.cs
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.csproj.CoreCompileInputs.cache
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.dll
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.pdb
+C:\5by5\Exercicio-9\obj\Debug\netcoreapp3.1\Exercicio-9.genruntimeconfig.cache
