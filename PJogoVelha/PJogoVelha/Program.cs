@@ -112,6 +112,7 @@ namespace PJogoVelha
 
                     Thread.Sleep(500);
                     Console.Clear();
+                    sair++;
 
                 } while (sair < 50);
             }
