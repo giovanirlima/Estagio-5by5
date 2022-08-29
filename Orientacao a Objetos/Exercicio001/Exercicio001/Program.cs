@@ -15,7 +15,7 @@ namespace Exercicio1
     {
         static void Main(string[] args)
         {
-            Pessoa[] p = new Pessoa[3];
+            Pessoa[] p = new Pessoa[1];
 
 
             for (int i = 0; i < p.Length; i++)

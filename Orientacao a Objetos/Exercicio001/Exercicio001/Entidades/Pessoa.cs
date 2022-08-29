@@ -25,10 +25,8 @@ namespace Exercicio1.Entidades
 
         public override string ToString()
         {
-            return $"Nome: {Nome}\nData de Nascimento: {Nascimento}\nCPF: {CPF}\nTelefone: {Telefone}";
+            return $"Nome: {Nome}\nData de Nascimento: {Nascimento.ToShortDateString()}\nCPF: {CPF}\nTelefone: {Telefone}";
         }
-
-
     }
 }
 
