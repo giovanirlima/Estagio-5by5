@@ -22,15 +22,45 @@ namespace PBancoM.Entities
             Matricula = matricula;
             Agencia = agencia;
         }
-
-        public Cliente[] CadastrarCliente(int contador)
+        public double VerificarTipoDeConta(double renda)
         {
-            Cliente[] cliente = new Cliente[contador];
+            double chequeEspecial = 0;
+
+            if (renda <= 1000)
+            {
+                Console.WriteLine("Sua conta após aprovação será modelo universitário(a)");
+                chequeEspecial = 1000;
+                Console.WriteLine($"Com cheque especial liberado no valor de {chequeEspecial.ToString("F2")}");
+                return chequeEspecial;
+            }
+            else
+            {
+                if (renda > 1000 && renda <= 2500)
+                {
+                    Console.WriteLine("Sua conta após aprovação será modelo normal class");
+                    chequeEspecial = 2500;
+                    Console.WriteLine($"Com cheque especial liberado no valor de {chequeEspecial.ToString("F2")}");
+                    return chequeEspecial;
+                }
+                else
+                {
+                    Console.WriteLine("Sua conta após aprovação será modelo VIP");
+                    chequeEspecial = 5000;
+                    Console.WriteLine($"Com cheque especial liberado no valor de {chequeEspecial.ToString("F2")}");
+                    return chequeEspecial;
+                }
+            }
+        }
+        public Cliente CadastrarCliente(Cliente[] cliente, ContaCorrente[] conta, Agencia[] agencia, int contCliente, int contAgencia)
+        {
             Gerente gerente = new Gerente();
+            ContaPoupanca[] poupanca = new ContaPoupanca[contCliente];
+            double saldo = 0;
+            double chequeEspecial = 0;
             //Cliente[] cliente = new Cliente[contador];
 
             Console.WriteLine("Olá senhor cliente, vamos iniciar seu cadastro");
-            
+
             Console.Write("Informe seu nome: ");
             string nome = Console.ReadLine();
 
@@ -50,15 +80,23 @@ namespace PBancoM.Entities
             Console.Write("Informe sua renda mensal: ");
             double renda = double.Parse(Console.ReadLine());
 
-            bool resposta = gerente.AprovarConta(nome, cpf, nascimento, telefone, endereco, renda);
+            VerificarTipoDeConta(renda);
+
+            bool resposta = gerente.AprovarConta(nome, cpf, nascimento, telefone, renda);
 
             if (resposta)
             {
-                return cliente[contador] = new Cliente (nome, cpf, nascimento, telefone, endereco, renda);
+                Console.Write("Informe o id da conta: ");
+                int id = int.Parse(Console.ReadLine());
+
+                conta[contCliente] = new ContaCorrente(id, agencia[contAgencia], saldo, chequeEspecial);
+                poupanca[contCliente] = new ContaPoupanca(id, agencia[contAgencia], saldo);
+
+                return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, conta[contCliente], poupanca[contCliente]);
             }
             else
             {
-
+                return null;
             }
         }
     }

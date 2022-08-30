@@ -20,7 +20,7 @@ namespace PBancoM.Entities
         public Cliente()
         {
         }
-        public Cliente(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda)
+        public Cliente(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda, ContaCorrente cCorrente, ContaPoupanca cPoupanca)
         {
             Nome = nome;
             Cpf = cpf;
@@ -28,23 +28,22 @@ namespace PBancoM.Entities
             Telefone = telefone;
             Endereco = endereco;
             Renda = renda;
+            ContaCorrente = cCorrente;
+            ContaPoupanca = cPoupanca;
         }
 
         void SolicitarAbertura()
         {
 
         }
-
         void SolicitarEmprestimo()
         {
 
         }
-
         void DesbloquearCartao()
         {
 
         }
-
         public override string ToString()
         {
             return $"Nome: {Nome}\nCPF: {Cpf}\nData de Nascimento: {Nascimento}\nTelefone: {Telefone}" +

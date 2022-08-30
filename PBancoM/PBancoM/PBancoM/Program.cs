@@ -15,15 +15,15 @@ namespace PBancoM
             Agencia[] agencias = new Agencia[contAgencia];
             ContaCorrente[] contas = new ContaCorrente[contCliente];
 
-            
+
             do
             {
-                Console.WriteLine("Olá usúario, Infome a opção desejada: ");
+                Console.WriteLine("Olá Gerente, Infome a opção desejada: ");
                 Console.WriteLine("");
                 Console.WriteLine("1 - Cadastrar Funcionario");
                 Console.WriteLine("2 - Cadastrar Cliente");
                 Console.WriteLine("3 - Cadastrar Agência");
-                Console.WriteLine("4 - Ir para o próximo menu >");
+                Console.WriteLine("4 - Ir para o página de usúario menu >");
                 Console.WriteLine();
                 Console.WriteLine("0 - Sair");
                 try
@@ -54,23 +54,49 @@ namespace PBancoM
                 switch (opc)
                 {
                     case 1:
-                        funcionarios[contFuncionario] = g.CadastrarFuncionario(contFuncionario);
+                        funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, contFuncionario);
                         contFuncionario++;
+                        Console.Clear();
                         break;
 
                     case 2:
+                        clientes[contCliente] = g.CadastrarCliente(clientes, contas, agencias, contCliente, contAgencia);
+                        contCliente++;
+                        Console.Clear();
+                        break;
 
-                        break;
                     case 3:
+                        g.CadastrarAgencia(agencias, contAgencia);
+                        contAgencia++;
+                        Console.Clear();
                         break;
+
                     case 4:
+                        do
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Olá usúario, Infome a opção desejada: ");
+                            Console.WriteLine("");
+                            Console.WriteLine("1 - Solicitar abertura de conta");
+                            Console.WriteLine("2 - Desbloquear cartão");
+                            Console.WriteLine("3 - Cadastrar Agência");
+                            Console.WriteLine("4 - Ir para o página de usúario menu >");
+                            Console.WriteLine();
+                            Console.WriteLine("0 - Sair");
+                        } while (true);
+
+
+
                         break;
                     case 5:
                         break;
+
                     case 6:
                         break;
+
                     case 7:
                         break;
+
                     case 8:
                         break;
 
@@ -80,7 +106,10 @@ namespace PBancoM
 
 
 
+            
 
+
+            
 
 
 

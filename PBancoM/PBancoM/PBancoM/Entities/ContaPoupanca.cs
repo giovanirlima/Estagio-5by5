@@ -10,6 +10,10 @@ namespace PBancoM.Entities
     {
         public double SaldoCP { get; set; }
 
+        public ContaPoupanca(int id, Agencia agencia, double saldoCP) : base(id, agencia)
+        {
+            SaldoCP = saldoCP;
+        }
         void AdicionarRendimento()
         {
         }

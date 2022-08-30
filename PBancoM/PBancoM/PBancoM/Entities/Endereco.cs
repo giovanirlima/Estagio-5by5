@@ -32,7 +32,7 @@ namespace PBancoM.Entities
             int n = int.Parse(Console.ReadLine());
 
             Console.Write("Informe a cidade: ");
-            string cidade = Console.ReadLine(); 
+            string cidade = Console.ReadLine();
 
             return new Endereco(rua, cidade, n);
         }

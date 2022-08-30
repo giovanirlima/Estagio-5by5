@@ -10,11 +10,9 @@ namespace PBancoM.Entities
     {
         public int Id { get; set; }
         public Endereco Endereco { get; set; }
-
-        Agencia()
+        public Agencia()
         {
         }
-
         public Agencia(int id, Endereco endereco)
         {
             Id = id;

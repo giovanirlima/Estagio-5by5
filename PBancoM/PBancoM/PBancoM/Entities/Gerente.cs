@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,10 +16,8 @@ namespace PBancoM.Entities
         {
         }
 
-        public Funcionario CadastrarFuncionario(int contador)
+        public Funcionario CadastrarFuncionario(Funcionario[] funcionario, int contador)
         {
-            Funcionario[] funcionario = new Funcionario[contador];
-            Funcionario[] gerente = new Gerente[contador];
             char tipo = 'a';
             bool validacao = false;
 
@@ -70,7 +69,7 @@ namespace PBancoM.Entities
 
             if (tipo == 's')
             {
-                return gerente[contador] = new Gerente(nome, matricula, agencia);
+                return funcionario[contador] = new Gerente(nome, matricula, agencia);
             }
 
             else
@@ -78,16 +77,74 @@ namespace PBancoM.Entities
                 return funcionario[contador] = new Funcionario(nome, matricula, agencia);
             }
         }
-        void CadastrarAgencia()
+        public Agencia CadastrarAgencia(Agencia[] agencia, int contador)
         {
+            bool verificacao = false;
+            int id = 0;
+            Console.WriteLine("Olá, Sr. Gerente");
+            do
+            {
+                Console.Write("Informe id da agencia: ");
+                id = int.Parse(Console.ReadLine());
+
+                for (int i = 0; i < contador; i++)
+                {
+                    if (agencia[i].Id == id)
+                    {
+                        Console.WriteLine("Já existe este ID cadastrado");
+                        verificacao = true;
+                    }
+                }
+            } while (verificacao);
+
+            Endereco endereco = new Endereco();
+
+            endereco.CadastrarEndereco();
+
+            return agencia[contador] = new Agencia(id, endereco);
+        }
+        public bool AprovarEmprestimo(Cliente[] cliente, int contCliente, double emprestimo)
+        {
+            bool validacao = false;
+
+            Console.WriteLine("olá sr.(a) Gerente!");
+            Console.WriteLine("Pedido de empréstimo para aprovação");
+            Console.WriteLine($"Nome: {cliente[contCliente].Nome}");
+            Console.WriteLine($"Renda: {cliente[contCliente].Renda}");
+            Console.WriteLine($"Valor solicitado: {emprestimo.ToString("F2")}");
+            Console.WriteLine();
+            do
+            {
+                Console.WriteLine("1 - Aprovar\n2 - Recusar");
+                int resposta = int.Parse(Console.ReadLine());
+                validacao = false;
+
+
+                if (resposta != 1 || resposta != 2)
+                {
+                    Console.WriteLine("Opção escolhida é inexistente!");
+                    Console.WriteLine("Escolha 1 ou 2");
+                    Console.Clear();
+                    validacao = true;
+                    return false;
+                }
+                else
+                {
+                    if (resposta == 1)
+                    {
+                        Console.WriteLine("Pedido de empréstimo aprovado");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Pedido de empréstimo reprovado");
+                        return false;
+                    }
+                }
+            } while (validacao);
 
         }
-
-        void AprovarEmprestimo()
-        {
-
-        }
-        public bool AprovarConta(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda)
+        public bool AprovarConta(string nome, string cpf, DateTime nascimento, string telefone, double renda)
         {
             Console.WriteLine("Olá sr. Gerente");
             Console.WriteLine("Dados do cliente para aprovação: ");
