@@ -26,31 +26,7 @@ namespace PBancoM.Entities
             string nome = Console.ReadLine();
 
             Console.Write("Informe a matricula do funcionário: ");
-            int matricula = int.Parse(Console.ReadLine());
-
-            do
-            {
-                Console.WriteLine("O fúncionario será um novo gerente (s/n)?");
-                try
-                {
-                    tipo = char.Parse(Console.ReadLine().ToLower());
-                    validacao = false;
-                }
-
-                catch (Exception)
-                {
-                    Console.WriteLine("Opção informada é inválida!");
-                    Console.WriteLine("Informe s ou n!");
-                    validacao = true;
-                }
-
-                if (tipo != 's' || tipo != 'n')
-                {
-                    Console.WriteLine("Informe s ou n!");
-                    validacao = true;
-                }
-
-            } while (validacao);
+            int matricula = int.Parse(Console.ReadLine());                   
 
             Console.Write("Informe id da agência que o funcionário irá trabalhar: ");
             int id = int.Parse(Console.ReadLine());

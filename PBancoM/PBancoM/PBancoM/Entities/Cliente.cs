@@ -32,13 +32,32 @@ namespace PBancoM.Entities
             ContaPoupanca = cPoupanca;
         }
 
-        void SolicitarAbertura()
+        public void SolicitarAbertura(Cliente[] cliente, ContaCorrente[] conta, Agencia[] agencia, int contCliente, int contAgencia)
         {
+            Funcionario funcionario = new Funcionario();
 
+            Console.WriteLine("Olá Sr.(a) cliente!");
+            Console.Write("Deseja solicitar abertura de uma conta? (s/n)");
+            char resposta = char.Parse(Console.ReadLine().ToLower());
+
+            if (resposta == 's')
+            {
+                funcionario.CadastrarCliente(cliente, conta, agencia, contCliente, contAgencia);
+            }
+            else
+            {
+                Console.WriteLine("Até logo!");
+            }
         }
-        void SolicitarEmprestimo()
+        public void SolicitarEmprestimo(Cliente[] cliente, int contCliente)
         {
+            Gerente gerente = new Gerente();
 
+            Console.WriteLine($"Olá sr.(a) {cliente[contCliente].Nome}");
+            Console.WriteLine("Informe o valor que deseja solicitar: ");
+            double emprestimo = double.Parse(Console.ReadLine());
+
+            gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
         }
         void DesbloquearCartao()
         {

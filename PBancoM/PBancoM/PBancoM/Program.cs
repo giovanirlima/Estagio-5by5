@@ -9,7 +9,9 @@ namespace PBancoM
         {
             int opc = 0, contFuncionario = 0, contCliente = 0, contAgencia = 0;
             bool validacao = false;
+            char resposta;
             Gerente g = new Gerente();
+            Gerente[] gerentes = new Gerente[contFuncionario];
             Funcionario[] funcionarios = new Funcionario[contFuncionario];
             Cliente[] clientes = new Cliente[contCliente];
             Agencia[] agencias = new Agencia[contAgencia];
@@ -54,18 +56,33 @@ namespace PBancoM
                 switch (opc)
                 {
                     case 1:
-                        funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, contFuncionario);
-                        contFuncionario++;
                         Console.Clear();
+                        Console.Write("Novo funcionário é um gerente? (s/n)");
+                        resposta = char.Parse(Console.ReadLine().ToLower());
+
+                        if (resposta == 's')
+                        {
+                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, contFuncionario);
+                            contFuncionario++;
+                            Console.Clear();
+                        }
+                        else
+                        {
+                            gerentes[contFuncionario] = g.CadastrarFuncionario(funcionarios, contFuncionario);
+                            contFuncionario++;
+                            Console.Clear();
+                        }
                         break;
 
                     case 2:
+                        Console.Clear();
                         clientes[contCliente] = g.CadastrarCliente(clientes, contas, agencias, contCliente, contAgencia);
                         contCliente++;
                         Console.Clear();
                         break;
 
                     case 3:
+                        Console.Clear();
                         g.CadastrarAgencia(agencias, contAgencia);
                         contAgencia++;
                         Console.Clear();
@@ -106,13 +123,9 @@ namespace PBancoM
 
 
 
-            
 
 
-            
-
-
-
+   
         }
     }
 }
