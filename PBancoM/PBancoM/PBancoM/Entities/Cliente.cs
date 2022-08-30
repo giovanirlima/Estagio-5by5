@@ -6,10 +6,29 @@ using System.Threading.Tasks;
 
 namespace PBancoM.Entities
 {
-    public class Cliente : Pessoa
+    public class Cliente
     {
-        public double FaixaSalarial { get; set; }
-        public int Conta { get; set; }
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public DateTime Nascimento { get; set; }
+        public string Telefone { get; set; }
+        Endereco Endereco { get; set; }
+        public double Renda { get; set; }
+        public ContaCorrente ContaCorrente { get; set; }
+        public ContaPoupanca ContaPoupanca { get; set; }
+
+        public Cliente()
+        {
+        }
+        public Cliente(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda)
+        {
+            Nome = nome;
+            Cpf = cpf;
+            Nascimento = nascimento;
+            Telefone = telefone;
+            Endereco = endereco;
+            Renda = renda;
+        }
 
         void SolicitarAbertura()
         {
@@ -24,6 +43,12 @@ namespace PBancoM.Entities
         void DesbloquearCartao()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return $"Nome: {Nome}\nCPF: {Cpf}\nData de Nascimento: {Nascimento}\nTelefone: {Telefone}" +
+                    $"Renda mensal: {Renda}";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PBancoM.Entities
     public class Agencia
     {
         public int Id { get; set; }
-        public Endereco endereco { get; set; }
+        public Endereco Endereco { get; set; }
 
         Agencia()
         {
@@ -18,7 +18,7 @@ namespace PBancoM.Entities
         public Agencia(int id, Endereco endereco)
         {
             Id = id;
-            this.endereco = endereco;
+            Endereco = endereco;
         }
     }
 }
