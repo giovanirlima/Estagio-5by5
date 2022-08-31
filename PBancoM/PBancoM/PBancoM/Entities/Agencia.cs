@@ -18,5 +18,10 @@ namespace PBancoM.Entities
             Id = id;
             Endereco = endereco;
         }
+
+        public override string ToString()
+        {
+            return $"\nAgência: \nId: {Id}\nEndereço: {Endereco.Rua} {Endereco.Numero}, {Endereco.Cidade}";
+        }
     }
 }

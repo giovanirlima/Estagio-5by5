@@ -21,7 +21,7 @@ namespace PBancoM.Entities
         public Cliente()
         {
         }
-        public Cliente(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda, ContaCorrente cCorrente, ContaPoupanca cPoupanca)
+        public Cliente(string nome, string cpf, DateTime nascimento, string telefone, Endereco endereco, double renda, ContaCorrente cCorrente, ContaPoupanca cPoupanca, Cartao cartaoCCorrente)
         {
             Nome = nome;
             Cpf = cpf;
@@ -33,21 +33,22 @@ namespace PBancoM.Entities
             ContaPoupanca = cPoupanca;
         }
 
-        public void SolicitarAbertura(Cliente[] cliente, ContaCorrente[] contaCorrente, ContaPoupanca[] contaPoupanca, Agencia[] agencia, int contCliente, int contAgencia)
+        public Cliente SolicitarAbertura(Cliente[] cliente, ContaCorrente[] contaCorrente, ContaPoupanca[] contaPoupanca, Cartao[] cartaoCCorrente, Agencia[] agencia, int contCliente, int contAgencia)
         {
             Funcionario funcionario = new Funcionario();
 
             Console.WriteLine("Olá Sr.(a) cliente!");
-            Console.Write("Deseja solicitar abertura de uma conta? (s/n)");
+            Console.Write("Deseja solicitar abertura de uma conta? (s/n): ");
             char resposta = char.Parse(Console.ReadLine().ToLower());
 
             if (resposta == 's')
             {
-                funcionario.CadastrarCliente(cliente, contaCorrente, contaPoupanca, agencia, contCliente, contAgencia);
+                return cliente[contCliente] = funcionario.CadastrarCliente(cliente, contaCorrente, contaPoupanca, cartaoCCorrente, agencia, contCliente, contAgencia);
             }
             else
             {
                 Console.WriteLine("Até logo!");
+                return null;
             }
         }
         public void SolicitarEmprestimo(Cliente[] cliente, int contCliente)
@@ -60,7 +61,7 @@ namespace PBancoM.Entities
 
             gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
         }
-        public Cartao DesbloquearCartao(Cliente[] cliente, Cartao[] cartaoCCorrente, int contCliente)
+        public Cartao DesbloquearCartao(Cliente[] cliente, int contCliente)
         {
             Console.Clear();
             Console.WriteLine("Olá, Sr.(a) cliente\n");
@@ -69,16 +70,16 @@ namespace PBancoM.Entities
 
             if (resposta == 's')
             {
-                if (cliente[contCliente].Cartao == null)
+                if (cliente[contCliente].Cartao.Saldo == 0)
                 {
-                    return cliente[contCliente].Cartao = new Cartao(1000, 30);
+                    return new Cartao(1000, 30);
                 }
 
                 else
                 {
                     Console.WriteLine("Cliente já possue um cartão criado!");
                     Console.WriteLine(cliente[contCliente].Cartao);
-                    return null;
+                    return cliente[contCliente].Cartao;
                 }
             }
             else

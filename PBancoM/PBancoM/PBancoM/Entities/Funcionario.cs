@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PBancoM.Entities
@@ -52,7 +53,7 @@ namespace PBancoM.Entities
                 }
             }
         }
-        public Cliente CadastrarCliente(Cliente[] cliente, ContaCorrente[] contaCorrente,ContaPoupanca[] contaPoupanca, Agencia[] agencia, int contCliente, int contAgencia)
+        public Cliente CadastrarCliente(Cliente[] cliente, ContaCorrente[] contaCorrente,ContaPoupanca[] contaPoupanca, Cartao[] cartaoCCorrente, Agencia[] agencia, int contCliente, int contAgencia)
         {
             Gerente gerente = new Gerente();
             
@@ -89,18 +90,29 @@ namespace PBancoM.Entities
 
             if (resposta)
             {
+                Console.Clear();
+                Console.WriteLine("Retornando aprovação para o funcionário . . .");
+                Thread.Sleep(500);
                 Console.Write("Informe o id da conta: ");
                 int id = int.Parse(Console.ReadLine());
 
                 contaCorrente[contCliente] = new ContaCorrente(id, agencia[contAgencia], saldo, chequeEspecial);
                 contaPoupanca[contCliente] = new ContaPoupanca(id, agencia[contAgencia], saldo);
+                cartaoCCorrente[contCliente] = new Cartao(0, 30);
 
-                return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, contaCorrente[contCliente], contaPoupanca[contCliente]);
+                return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, contaCorrente[contCliente], contaPoupanca[contCliente], cartaoCCorrente[contCliente]);
             }
             else
             {
                 return null;
             }
         }
+
+        public override string ToString()
+        {
+            return $"\nNovo funcionário\nNome: {Nome}\nMatricula: {Matricula}\nAgência: {Agencia.ToString()}";
+        }
+
+
     }
 }

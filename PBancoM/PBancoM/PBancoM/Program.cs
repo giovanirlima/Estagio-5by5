@@ -6,13 +6,21 @@ namespace PBancoM
 {
     internal class Program
     {
+        static Agencia[] IniciarAgencia(Agencia[] agencias)
+        {
+            agencias[0] = new Agencia(1, new Endereco("R: Alfredo Botta", "Araraquara", 407));
+            agencias[1] = new Agencia(2, new Endereco("R: Pedro Cunha", "Araraquara", 408));
+            agencias[2] = new Agencia(3, new Endereco("R: Joao Gomes", "Araraquara", 409));
+            return agencias;
+        }
         static void Main(string[] args)
         {
-            int opc = 0, contFuncionario = 0, contGerentes = 0, contCliente = 0, contAgencia = 0;
+            int opc = 0, contFuncionario = 0, contGerentes = 0, contCliente = 0, contAgencia = 3;
             bool validacao = false;
             char resposta;
 
             Gerente g = new Gerente();
+            Cliente c = new Cliente();
             Gerente[] gerentes = new Gerente[10];
             Funcionario[] funcionarios = new Funcionario[10];
             Cliente[] clientes = new Cliente[10];
@@ -21,6 +29,7 @@ namespace PBancoM
             ContaPoupanca[] contasPoupancas = new ContaPoupanca[10];
             Cartao[] cartaoCCorrente = new Cartao[10];
 
+            IniciarAgencia(agencias);
 
             do
             {
@@ -32,6 +41,7 @@ namespace PBancoM
                 Console.WriteLine("4 - Ir para o página de usúario menu >");
                 Console.WriteLine();
                 Console.WriteLine("0 - Sair");
+                Console.Write("\nOpção: ");
                 try
                 {
                     opc = int.Parse(Console.ReadLine());
@@ -61,12 +71,12 @@ namespace PBancoM
                 {
                     case 1:
                         Console.Clear();
-                        Console.Write("Novo funcionário é um gerente? (s/n)");
+                        Console.Write("Novo funcionário é um gerente? (s/n) ");
                         resposta = char.Parse(Console.ReadLine().ToLower());
 
                         if (resposta == 'n')
                         {
-                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, contFuncionario);
+                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, agencias, contFuncionario, contAgencia);
                             contFuncionario++;
                             Console.Clear();
                         }
@@ -80,7 +90,7 @@ namespace PBancoM
 
                     case 2:
                         Console.Clear();
-                        clientes[contCliente] = g.CadastrarCliente(clientes, contasCorrentes, contasPoupancas, agencias, contCliente, contAgencia);
+                        clientes[contCliente] = g.CadastrarCliente(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contCliente, contAgencia);
                         contCliente++;
                         Console.Clear();
                         break;
@@ -133,12 +143,12 @@ namespace PBancoM
                             {
                                 case 1:
                                     Console.Clear();
-                                    clientes[contCliente].SolicitarAbertura(clientes, contasCorrentes, contasPoupancas, agencias, contCliente, contAgencia);
+                                    clientes[contCliente] = c.SolicitarAbertura(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contCliente, contAgencia);
                                     contCliente++;
                                     break;
 
                                 case 2:
-
+                                    clientes[contCliente].Cartao = c.DesbloquearCartao(clientes, contCliente);
                                     break;
 
                                 case 0:
