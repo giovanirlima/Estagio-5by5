@@ -25,13 +25,13 @@ namespace PBancoM.Entities
 
         public Endereco CadastrarEndereco()
         {
-            Console.Write("Informe o nome da rua: ");
+            Console.Write("Informe o nome da Rua: ");
             string rua = Console.ReadLine();
 
-            Console.Write("Informe o número do local: ");
+            Console.Write("Informe o número do Local: ");
             int n = int.Parse(Console.ReadLine());
 
-            Console.Write("Informe a cidade: ");
+            Console.Write("Informe a Cidade: ");
             string cidade = Console.ReadLine();
 
             return new Endereco(rua, cidade, n);

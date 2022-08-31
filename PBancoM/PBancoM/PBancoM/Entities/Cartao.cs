@@ -21,6 +21,12 @@ namespace PBancoM.Entities
             Vencimento = vencimento;
         }
 
+        public Cartao(int id, double limite, int vencimento) : base(id)
+        {
+            Limite = limite;
+            Vencimento = vencimento;
+        }
+
         public Cartao(int id, Agencia agencia) : base(id, agencia)
         {
         }

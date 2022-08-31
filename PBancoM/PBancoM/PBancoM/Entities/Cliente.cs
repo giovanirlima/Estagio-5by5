@@ -31,6 +31,7 @@ namespace PBancoM.Entities
             Renda = renda;
             ContaCorrente = cCorrente;
             ContaPoupanca = cPoupanca;
+            Cartao = cartaoCCorrente;
         }
 
         public Cliente SolicitarAbertura(Cliente[] cliente, ContaCorrente[] contaCorrente, ContaPoupanca[] contaPoupanca, Cartao[] cartaoCCorrente, Agencia[] agencia, int contCliente, int contAgencia)
@@ -38,7 +39,7 @@ namespace PBancoM.Entities
             Funcionario funcionario = new Funcionario();
 
             Console.WriteLine("Olá Sr.(a) cliente!");
-            Console.Write("Deseja solicitar abertura de uma conta? (s/n): ");
+            Console.Write("\nDeseja solicitar abertura de uma conta? (s/n): ");
             char resposta = char.Parse(Console.ReadLine().ToLower());
 
             if (resposta == 's')
@@ -91,8 +92,8 @@ namespace PBancoM.Entities
         }
         public override string ToString()
         {
-            return $"Nome: {Nome}\nCPF: {Cpf}\nData de Nascimento: {Nascimento}\nTelefone: {Telefone}" +
-                    $"Renda mensal: {Renda}";
+            return $"Nome: {Nome}\nCPF: {Cpf}\nData de Nascimento: {Nascimento.ToShortDateString()}\nTelefone: {Telefone}" +
+                   $"\nRenda mensal: R$ {Renda.ToString("F2")}\nConta id: {ContaCorrente.Id}\n";
         }
     }
 }

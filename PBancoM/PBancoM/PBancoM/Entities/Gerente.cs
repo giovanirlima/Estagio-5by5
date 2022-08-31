@@ -17,34 +17,6 @@ namespace PBancoM.Entities
         {
         }
 
-        /*public Gerente CadastrarGerente(Gerente[] gerente, int contGerente)
-        {
-            Console.WriteLine("Olá Gerente");
-            Console.Write("Informe o nome do novo funcionário: ");
-            string nome = Console.ReadLine();
-
-            Console.Write("Informe a matricula do funcionário: ");
-            int matricula = int.Parse(Console.ReadLine());
-
-            Console.Write("Informe id da agência que o funcionário irá trabalhar: ");
-            int id = int.Parse(Console.ReadLine());
-
-            Console.Write("informe o nome da rua da agência: ");
-            string rua = Console.ReadLine();
-
-            Console.Write("Informe o número da agência: ");
-            int n = int.Parse(Console.ReadLine());
-
-            Console.Write("Informe a cidade da agência: ");
-            string cidade = Console.ReadLine();
-
-            Endereco endereco = new Endereco(rua, cidade, n);
-            Agencia agencia = new Agencia(id, endereco);
-
-            return gerente[contGerente] = new Gerente(nome, matricula, agencia);
-
-        }
-        */
         public Gerente CadastrarGerente(Gerente[] gerente, Funcionario[] funcionario, Agencia[] agencias, int contGerente, int contFuncionario, int contAgencia)
         {
             Console.Clear();
@@ -80,7 +52,7 @@ namespace PBancoM.Entities
                         Console.WriteLine("Necessário escolher uma nova!\n");
                         validacao = true;
                     }
-                }                               
+                }
 
             } while (validacao);
 
@@ -197,7 +169,6 @@ namespace PBancoM.Entities
             return agencia[contAgencia] = new Agencia(id, endereco.CadastrarEndereco());
 
         }
-
         public bool AprovarEmprestimo(Cliente[] cliente, int contCliente, double emprestimo)
         {
             bool validacao = false;
@@ -248,12 +219,15 @@ namespace PBancoM.Entities
                               $"\nTelefone: {telefone}\nRenda mensal: R${renda.ToString("F2")}");
 
             Console.WriteLine("Deseja aprovar criação da conta: SIM/NAO");
+
+            Console.Write("Resposta: ");
             string resposta = Console.ReadLine().ToLower();
 
             if (resposta == "sim" || resposta == "s")
             {
                 Console.WriteLine("Conta aprovada!");
                 Console.WriteLine("Prossiga com o cadastro!");
+                Thread.Sleep(1000);
                 return true;
             }
 
@@ -266,6 +240,60 @@ namespace PBancoM.Entities
             }
 
         }
+        public void VerAgenciasCadastradas(Agencia[] agencia, int contAgencia)
+        {
+            for (int i = 0; i < contAgencia; i++)
+            {
+                Console.WriteLine(agencia[i].ToString());
+            }
 
+            Console.ReadKey();
+
+            Console.Clear();
+        }
+        public void VerFuncionariosCadastrados(Gerente[] gerente, Funcionario[] funcionario, int contGerente, int contFuncionario)
+        {
+            
+            Console.WriteLine("Gerentes cadastrados: ");
+
+            for (int i = 0; i < contGerente; i++)
+            {
+                Console.WriteLine(gerente[i].ToString());
+            }
+
+            Console.ReadKey();
+
+            Console.Clear();
+
+            Console.WriteLine("Funcionarios cadastrados: ");
+            
+            for (int i = 0; i < contFuncionario; i++)
+            {
+                Console.WriteLine(funcionario[i].ToString());
+            }
+
+            Console.ReadKey();
+
+            Console.Clear();
+
+        }
+        public void VerClientesCadastrados(Cliente[] cliente, int contCliente)
+        {
+            Console.WriteLine("Clientes cadastrados:\n");
+
+            for (int i = 0; i < contCliente; i++)
+            {
+                Console.WriteLine(cliente[i].ToString());
+            }
+
+            Console.ReadKey();
+
+            Console.Clear();
+        }
+
+        public override string ToString()
+        {
+            return $"\nNome: {Nome}\nMatricula: {Matricula}{Agencia.ToString()}";
+        }
     }
 }

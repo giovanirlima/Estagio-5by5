@@ -16,7 +16,10 @@ namespace PBancoM.Entities
 
         public ContaCorrente()
         {
-
+        }
+        public ContaCorrente(int id)
+        {
+            Id = Id;
         }
         public ContaCorrente(int id, Agencia agencia)
         {
