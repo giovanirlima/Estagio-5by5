@@ -17,7 +17,7 @@ namespace PBancoM.Entities
         {
         }
 
-        public Gerente CadastrarGerente(Gerente[] gerente, int contGerente)
+        /*public Gerente CadastrarGerente(Gerente[] gerente, int contGerente)
         {
             Console.WriteLine("Olá Gerente");
             Console.Write("Informe o nome do novo funcionário: ");
@@ -44,15 +44,45 @@ namespace PBancoM.Entities
             return gerente[contGerente] = new Gerente(nome, matricula, agencia);
 
         }
-        public Funcionario CadastrarFuncionario(Funcionario[] funcionario, Agencia[] agencias, int contFuncionario, int contAgencia)
+        */
+        public Gerente CadastrarGerente(Gerente[] gerente, Funcionario[] funcionario, Agencia[] agencias, int contGerente, int contFuncionario, int contAgencia)
         {
             Console.Clear();
             Console.WriteLine("Olá Gerente\n");
             Console.Write("Informe o nome do novo funcionário: ");
             string nome = Console.ReadLine();
 
-            Console.Write("Informe a matricula do funcionário: ");
-            int matricula = int.Parse(Console.ReadLine());
+            bool validacao;
+            int matricula;
+
+            do
+            {
+                Console.Write("Informe a matricula do novo funcionário: ");
+                matricula = int.Parse(Console.ReadLine());
+
+                validacao = false;
+
+                for (int i = 0; i < contGerente; i++)
+                {
+                    if (gerente[i].Matricula == matricula)
+                    {
+                        Console.WriteLine($"\nO Gerente {gerente[i].Nome} já possue está mátricula!");
+                        Console.WriteLine("Necessário escolher uma nova!\n");
+                        validacao = true;
+                    }
+                }
+
+                for (int i = 0; i < contFuncionario; i++)
+                {
+                    if (funcionario[i].Matricula == matricula)
+                    {
+                        Console.WriteLine($"\nO Funcionário {funcionario[i].Nome} já possue está mátricula!");
+                        Console.WriteLine("Necessário escolher uma nova!\n");
+                        validacao = true;
+                    }
+                }                               
+
+            } while (validacao);
 
             Console.Clear();
 
@@ -60,9 +90,69 @@ namespace PBancoM.Entities
 
             for (int i = 0; i < contAgencia; i++)
             {
-                
-                    Console.WriteLine(agencias[i].ToString());
-                
+
+                Console.WriteLine(agencias[i].ToString());
+
+            }
+
+            Console.Write("\nID: ");
+
+            int idAgencia = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("\nFuncionário cadastrado com sucesso!");
+
+            Thread.Sleep(2000);
+
+            return gerente[contGerente] = new Gerente(nome, matricula, agencias[idAgencia]);
+
+        }
+        public Funcionario CadastrarFuncionario(Funcionario[] funcionario, Gerente[] gerente, Agencia[] agencias, int contFuncionario, int contGerente, int contAgencia)
+        {
+            Console.Clear();
+            Console.WriteLine("Olá Gerente\n");
+            Console.Write("Informe o nome do novo funcionário: ");
+            string nome = Console.ReadLine();
+
+            bool validacao;
+            int matricula;
+
+            do
+            {
+                Console.Write("Informe a matricula do novo funcionário: ");
+                matricula = int.Parse(Console.ReadLine());
+
+                validacao = false;
+
+                for (int i = 0; i < contFuncionario; i++)
+                {
+                    if (funcionario[i].Matricula == matricula)
+                    {
+                        Console.WriteLine($"\nO Funcionário {funcionario[i].Nome} já possue está mátricula!");
+                        Console.WriteLine("Necessário escolher uma nova!\n");
+                        validacao = true;
+                    }
+                }
+                for (int i = 0; i < contGerente; i++)
+                {
+                    if (gerente[i].Matricula == matricula)
+                    {
+                        Console.WriteLine($"\nO Gerente {gerente[i].Nome} já possue está mátricula!");
+                        Console.WriteLine("Necessário escolher uma nova!\n");
+                        validacao = true;
+                    }
+                }
+
+            } while (validacao);
+
+            Console.Clear();
+
+            Console.WriteLine("Informe o id da agência que o funcionario será registrado");
+
+            for (int i = 0; i < contAgencia; i++)
+            {
+
+                Console.WriteLine(agencias[i].ToString());
+
             }
 
             Console.Write("\nID: ");
@@ -96,7 +186,7 @@ namespace PBancoM.Entities
                     {
                         Console.WriteLine("\nJá existe este ID cadastrado");
                         verificacao = true;
-                        
+
                     }
                 }
 

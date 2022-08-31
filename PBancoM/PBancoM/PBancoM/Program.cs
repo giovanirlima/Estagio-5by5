@@ -6,16 +6,35 @@ namespace PBancoM
 {
     internal class Program
     {
-        static Agencia[] IniciarAgencia(Agencia[] agencias)
+        static Gerente[] IniciarGerentes(Gerente[] gerentes, Agencia[] agencias)
+        {
+            gerentes[0] = new Gerente("Pestana", 123, agencias[0]);
+            gerentes[1] = new Gerente("Papini", 345, agencias[1]);
+            gerentes[2] = new Gerente("Fabricio", 678, agencias[2]);
+
+            return gerentes;
+
+        }
+        static Funcionario[] IniciarFuncionarios(Funcionario[] funcionarios, Agencia[] agencias)
+        {
+            funcionarios[0] = new Funcionario("Giovani", 234, agencias[0]);
+            funcionarios[1] = new Funcionario("Rocha", 567, agencias[1]);
+            funcionarios[2] = new Funcionario("Lima", 891, agencias[2]);
+
+            return funcionarios;
+        }
+        static Agencia[] IniciarAgencias(Agencia[] agencias)
         {
             agencias[0] = new Agencia(1, new Endereco("R: Alfredo Botta", "Araraquara", 407));
             agencias[1] = new Agencia(2, new Endereco("R: Pedro Cunha", "Araraquara", 408));
             agencias[2] = new Agencia(3, new Endereco("R: Joao Gomes", "Araraquara", 409));
+
             return agencias;
         }
+
         static void Main(string[] args)
         {
-            int opc = 0, contFuncionario = 0, contGerentes = 0, contCliente = 0, contAgencia = 3;
+            int opc = 0, contFuncionario = 3, contGerentes = 3, contCliente = 0, contAgencia = 3;
             bool validacao = false;
             char resposta;
 
@@ -29,7 +48,9 @@ namespace PBancoM
             ContaPoupanca[] contasPoupancas = new ContaPoupanca[10];
             Cartao[] cartaoCCorrente = new Cartao[10];
 
-            IniciarAgencia(agencias);
+            IniciarAgencias(agencias);
+            IniciarGerentes(gerentes, agencias);
+            IniciarFuncionarios(funcionarios, agencias);
 
             do
             {
@@ -76,13 +97,13 @@ namespace PBancoM
 
                         if (resposta == 'n')
                         {
-                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, agencias, contFuncionario, contAgencia);
+                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, gerentes, agencias, contFuncionario, contGerentes, contAgencia);
                             contFuncionario++;
                             Console.Clear();
                         }
                         else
                         {
-                            gerentes[contGerentes] = g.CadastrarGerente(gerentes, contGerentes);
+                            gerentes[contGerentes] = g.CadastrarGerente(gerentes, funcionarios, agencias, contGerentes, contFuncionario, contAgencia);
                             contGerentes++;
                             Console.Clear();
                         }
