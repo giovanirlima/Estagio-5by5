@@ -172,13 +172,10 @@ namespace PBancoM
 
                 }
 
-            } while (!validacao);
+            } while (opc != 0);
 
 
-            Gerente g1 = new Gerente();
-
-            g1.Nome = "a";
-
+            
 
 
 
