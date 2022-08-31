@@ -10,8 +10,7 @@ namespace PBancoM.Entities
     {
         public string Nome { get; set; }
         public int Matricula { get; set; }
-        public bool Tipo { get; set; }
-        Agencia Agencia { get; set; }
+        public Agencia Agencia { get; set; }
 
         public Funcionario()
         {
@@ -25,6 +24,8 @@ namespace PBancoM.Entities
         public double VerificarTipoDeConta(double renda)
         {
             double chequeEspecial = 0;
+
+            Console.Clear();
 
             if (renda <= 1000)
             {
@@ -51,10 +52,10 @@ namespace PBancoM.Entities
                 }
             }
         }
-        public Cliente CadastrarCliente(Cliente[] cliente, ContaCorrente[] conta, Agencia[] agencia, int contCliente, int contAgencia)
+        public Cliente CadastrarCliente(Cliente[] cliente, ContaCorrente[] contaCorrente,ContaPoupanca[] contaPoupanca, Agencia[] agencia, int contCliente, int contAgencia)
         {
             Gerente gerente = new Gerente();
-            ContaPoupanca[] poupanca = new ContaPoupanca[contCliente];
+            
             double saldo = 0;
             double chequeEspecial = 0;
             //Cliente[] cliente = new Cliente[contador];
@@ -82,6 +83,8 @@ namespace PBancoM.Entities
 
             VerificarTipoDeConta(renda);
 
+            Console.ReadKey();
+
             bool resposta = gerente.AprovarConta(nome, cpf, nascimento, telefone, renda);
 
             if (resposta)
@@ -89,10 +92,10 @@ namespace PBancoM.Entities
                 Console.Write("Informe o id da conta: ");
                 int id = int.Parse(Console.ReadLine());
 
-                conta[contCliente] = new ContaCorrente(id, agencia[contAgencia], saldo, chequeEspecial);
-                poupanca[contCliente] = new ContaPoupanca(id, agencia[contAgencia], saldo);
+                contaCorrente[contCliente] = new ContaCorrente(id, agencia[contAgencia], saldo, chequeEspecial);
+                contaPoupanca[contCliente] = new ContaPoupanca(id, agencia[contAgencia], saldo);
 
-                return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, conta[contCliente], poupanca[contCliente]);
+                return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, contaCorrente[contCliente], contaPoupanca[contCliente]);
             }
             else
             {

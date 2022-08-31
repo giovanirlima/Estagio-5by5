@@ -32,7 +32,7 @@ namespace PBancoM.Entities
             ContaPoupanca = cPoupanca;
         }
 
-        public void SolicitarAbertura(Cliente[] cliente, ContaCorrente[] conta, Agencia[] agencia, int contCliente, int contAgencia)
+        public void SolicitarAbertura(Cliente[] cliente, ContaCorrente[] contaCorrente, ContaPoupanca[] contaPoupanca, Agencia[] agencia, int contCliente, int contAgencia)
         {
             Funcionario funcionario = new Funcionario();
 
@@ -42,7 +42,7 @@ namespace PBancoM.Entities
 
             if (resposta == 's')
             {
-                funcionario.CadastrarCliente(cliente, conta, agencia, contCliente, contAgencia);
+                funcionario.CadastrarCliente(cliente, contaCorrente, contaPoupanca, agencia, contCliente, contAgencia);
             }
             else
             {

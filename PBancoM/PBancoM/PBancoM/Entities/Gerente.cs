@@ -16,17 +16,14 @@ namespace PBancoM.Entities
         {
         }
 
-        public Funcionario CadastrarFuncionario(Funcionario[] funcionario, int contador)
+        public Gerente CadastrarGerente(Gerente[] gerente, int contGerente)
         {
-            char tipo = 'a';
-            bool validacao = false;
-
             Console.WriteLine("Olá Gerente");
             Console.Write("Informe o nome do novo funcionário: ");
             string nome = Console.ReadLine();
 
             Console.Write("Informe a matricula do funcionário: ");
-            int matricula = int.Parse(Console.ReadLine());                   
+            int matricula = int.Parse(Console.ReadLine());
 
             Console.Write("Informe id da agência que o funcionário irá trabalhar: ");
             int id = int.Parse(Console.ReadLine());
@@ -43,15 +40,35 @@ namespace PBancoM.Entities
             Endereco endereco = new Endereco(rua, cidade, n);
             Agencia agencia = new Agencia(id, endereco);
 
-            if (tipo == 's')
-            {
-                return funcionario[contador] = new Gerente(nome, matricula, agencia);
-            }
+            return gerente[contGerente] = new Gerente(nome, matricula, agencia);
 
-            else
-            {
-                return funcionario[contador] = new Funcionario(nome, matricula, agencia);
-            }
+        }
+        public Funcionario CadastrarFuncionario(Funcionario[] funcionario, int contFuncionario)
+        {
+            Console.WriteLine("Olá Gerente");
+            Console.Write("Informe o nome do novo funcionário: ");
+            string nome = Console.ReadLine();
+
+            Console.Write("Informe a matricula do funcionário: ");
+            int matricula = int.Parse(Console.ReadLine());
+
+            Console.Write("Informe id da agência que o funcionário irá trabalhar: ");
+            int id = int.Parse(Console.ReadLine());
+
+            Console.Write("informe o nome da rua da agência: ");
+            string rua = Console.ReadLine();
+
+            Console.Write("Informe o número da agência: ");
+            int n = int.Parse(Console.ReadLine());
+
+            Console.Write("Informe a cidade da agência: ");
+            string cidade = Console.ReadLine();
+
+            Endereco endereco = new Endereco(rua, cidade, n);
+            Agencia agencia = new Agencia(id, endereco);
+
+            return funcionario[contFuncionario] = new Funcionario(nome, matricula, agencia);
+
         }
         public Agencia CadastrarAgencia(Agencia[] agencia, int contador)
         {
@@ -122,12 +139,13 @@ namespace PBancoM.Entities
         }
         public bool AprovarConta(string nome, string cpf, DateTime nascimento, string telefone, double renda)
         {
-            Console.WriteLine("Olá sr. Gerente");
+
+            Console.WriteLine("\n\nOlá sr. Gerente");
             Console.WriteLine("Dados do cliente para aprovação: ");
-            Console.WriteLine($"Nome: {nome}\nCPF: {cpf}\nData de Nascimento: {nascimento}" +
+            Console.WriteLine($"Nome: {nome}\nCPF: {cpf}\nData de Nascimento: {nascimento.ToShortDateString()}" +
                               $"\nTelefone: {telefone}\nRenda mensal: {renda}");
 
-            Console.Write("Deseja aprovar criação da conta: SIM/NAO");
+            Console.WriteLine("Deseja aprovar criação da conta: SIM/NAO");
             string resposta = Console.ReadLine().ToLower();
 
             if (resposta == "sim" || resposta == "s")
