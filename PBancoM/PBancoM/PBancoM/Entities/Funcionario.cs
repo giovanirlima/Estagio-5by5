@@ -39,7 +39,7 @@ namespace PBancoM.Entities
             {
                 if (renda > 1000 && renda <= 2500)
                 {
-                    Console.WriteLine("Sua conta será encaminhada para aprovação!\nCaso o Gerente do seu banco aprove sua conta, ela será modelo normal class");                                        
+                    Console.WriteLine("Sua conta será encaminhada para aprovação!\nCaso o Gerente do seu banco aprove sua conta, ela será modelo normal class");
                     chequeEspecial = 2500;
                     Console.WriteLine($"Com cheque especial liberado no valor de R$ {chequeEspecial.ToString("F2")}");
                     return chequeEspecial;
@@ -60,6 +60,7 @@ namespace PBancoM.Entities
             int id;
             double saldo = 0;
             double chequeEspecial = 0;
+            bool validacao;
             //Cliente[] cliente = new Cliente[contador];
 
             Console.Clear();
@@ -92,7 +93,7 @@ namespace PBancoM.Entities
             bool resposta = gerente.AprovarConta(nome, cpf, nascimento, telefone, renda);
 
             if (resposta)
-            {                
+            {
                 Console.WriteLine("\nRetornando aprovação para o funcionário . . .");
 
                 Thread.Sleep(1500);
@@ -103,28 +104,32 @@ namespace PBancoM.Entities
                 {
                     Console.Write("Informe o id da nova conta do cliente: ");
                     id = int.Parse(Console.ReadLine());
+                    validacao = false;
 
                     for (int i = 0; i < contCliente; i++)
                     {
-                        if (contaCorrente[i].Id == id)
+                        if (cliente[i].ContaCorrente.Id == id)
                         {
                             Console.WriteLine("\nId informado já está sendo utilizado por outro cliente!");
                             Console.WriteLine("Escolha outro Id");
+
+                            validacao = true;
+
+                            Console.ReadKey();
                         }
                     }
 
-                    Thread.Sleep(2000);
-
                     Console.Clear();
 
-                } while (true);
-                
-
-
+                } while (validacao);
 
                 contaCorrente[contCliente] = new ContaCorrente(id, agencia[contAgencia], saldo, chequeEspecial);
                 contaPoupanca[contCliente] = new ContaPoupanca(id, agencia[contAgencia], saldo);
                 cartaoCCorrente[contCliente] = new Cartao(0, 30);
+
+                Console.WriteLine("Conta criada com sucesso!");
+
+                Thread.Sleep(2000);
 
                 return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, contaCorrente[contCliente], contaPoupanca[contCliente], cartaoCCorrente[contCliente]);
             }

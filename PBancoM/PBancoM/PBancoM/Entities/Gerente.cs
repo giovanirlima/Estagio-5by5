@@ -220,12 +220,12 @@ namespace PBancoM.Entities
 
             Console.WriteLine("Deseja aprovar criação da conta: SIM/NAO");
 
-            Console.Write("Resposta: ");
+            Console.Write("\nResposta: ");
             string resposta = Console.ReadLine().ToLower();
 
             if (resposta == "sim" || resposta == "s")
             {
-                Console.WriteLine("Conta aprovada!");
+                Console.WriteLine("\nConta aprovada!");
                 Console.WriteLine("Prossiga com o cadastro!");
                 Thread.Sleep(1000);
                 return true;
@@ -233,7 +233,7 @@ namespace PBancoM.Entities
 
             else
             {
-                Console.WriteLine("Conta não aprovada!");
+                Console.WriteLine("\nConta não aprovada!");
                 Console.WriteLine("Cadastro negado!");
                 Console.ReadKey();
                 return false;

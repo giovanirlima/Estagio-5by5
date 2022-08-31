@@ -33,7 +33,7 @@ namespace PBancoM
         }
         static Cliente[] IniciarClientes(Cliente[] cliente, Agencia[] agencia)
         {
-            cliente[0] = new Cliente("João", "123.157.259-55", new DateTime(1994,12,03), "(15) 99665-1799", new Endereco("R: Fabio papini", "Araraquara", 915), 1000, new ContaCorrente(123, agencia[0]), new ContaPoupanca(123, agencia[0], 0), new Cartao(123, 0, 30));
+            cliente[0] = new Cliente("João", "123.157.259-55", new DateTime(1994, 12, 03), "(15) 99665-1799", new Endereco("R: Fabio papini", "Araraquara", 915), 1000, new ContaCorrente(123, agencia[0]), new ContaPoupanca(123, agencia[0], 0), new Cartao(123, 0, 30));
             cliente[1] = new Cliente("Pedro", "145.177.229-33", new DateTime(1970, 01, 05), "(15) 99662-1855", new Endereco("R: Mario Pestana", "Araraquara", 917), 2000, new ContaCorrente(321, agencia[1]), new ContaPoupanca(321, agencia[1], 0), new Cartao(321, 0, 30));
             cliente[2] = new Cliente("Mário", "773.152.524-00", new DateTime(1986, 07, 13), "(15) 99725-6614", new Endereco("R: Alamedas", "Araraquara", 325), 5000, new ContaCorrente(456, agencia[2]), new ContaPoupanca(456, agencia[2], 0), new Cartao(456, 0, 30));
 
@@ -154,13 +154,13 @@ namespace PBancoM
                         do
                         {
                             Console.Clear();
-                            Console.WriteLine("Olá usúario, Infome a opção desejada: \n");                            
+                            Console.WriteLine("Olá usúario, Infome a opção desejada: \n");
                             Console.WriteLine("1 - Solicitar abertura de conta");
                             Console.WriteLine("2 - Desbloquear cartão");
                             Console.WriteLine("3 - Acessar sua conta");
-                            Console.WriteLine("4 - Ir para o página de usúario menu >");                            
+                            Console.WriteLine("4 - Ir para o página de usúario menu >");
                             Console.WriteLine();
-                            Console.WriteLine("0 - Sair");
+                            Console.WriteLine("5 - Voltar ao menu anterior");
                             Console.Write("\nOpção: ");
                             try
                             {
@@ -177,7 +177,7 @@ namespace PBancoM
                                 Console.Clear();
                                 validacao = true;
                             }
-                            if (opc < 0)
+                            if (opc < 0 || opc > 9)
                             {
                                 Console.WriteLine("Opção inválida!");
                                 Console.WriteLine("Escolha uma das opções informadas!");
@@ -196,13 +196,20 @@ namespace PBancoM
                                     break;
 
                                 case 2:
-                                    clientes[contCliente].Cartao = c.DesbloquearCartao(clientes, contCliente);
+                                    c.DesbloquearCartao(clientes, contCliente);
                                     break;
 
-                                case 0:
+                                case 3:
+
+                                    break;
+
+                                case 4:
+
+                                    break;
+
+                                case 5:
                                     Console.Clear();
                                     break;
-
 
                                 default:
                                     Console.WriteLine("Opção inválida!");
@@ -213,15 +220,15 @@ namespace PBancoM
                             }
 
 
-                        } while (opc != 0);
+                        } while (opc != 5);
 
 
 
                         break;
 
-                    
 
-                    
+
+
 
                     case 8:
                         break;

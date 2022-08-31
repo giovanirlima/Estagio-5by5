@@ -62,8 +62,9 @@ namespace PBancoM.Entities
 
             gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
         }
-        public Cartao DesbloquearCartao(Cliente[] cliente, int contCliente)
+        public void DesbloquearCartao(Cliente[] cliente, int contCliente)
         {
+            int id;
             Console.Clear();
             Console.WriteLine("Olá, Sr.(a) cliente\n");
             Console.WriteLine("Deseja desbloquear seu cartão? (s/n)");
@@ -71,22 +72,37 @@ namespace PBancoM.Entities
 
             if (resposta == 's')
             {
-                if (cliente[contCliente].Cartao.Saldo == 0)
-                {
-                    return new Cartao(1000, 30);
-                }
+                Console.Write("\nInforme o id da Conta Corrente do cliente: ");
+                id = int.Parse(Console.ReadLine());
 
-                else
+                for (int i = 0; i < contCliente; i++)
                 {
-                    Console.WriteLine("Cliente já possue um cartão criado!");
-                    Console.WriteLine(cliente[contCliente].Cartao);
-                    return cliente[contCliente].Cartao;
-                }
+                    if (cliente[i].Cartao.Id == id)
+                    {
+                        if (cliente[i].Cartao.Limite == 0)
+                        {
+                            Console.WriteLine("Cartão desbloquado com sucesso!");
+                            cliente[i].Cartao.Limite += 1000;
+
+                            Console.WriteLine($"Sr.(a) {cliente[i].Nome} seu cartão foi desbloqueado com limite de R$ {cliente[i].Cartao.Limite.ToString("F2")}");
+
+                            Console.ReadKey();
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("cliente já desbloqueou seu cartão!");
+                            Console.WriteLine($"Saldo do cartão: {cliente[i].Cartao.Limite.ToString("F2")}");
+
+                            Console.ReadKey();
+                        }
+                    }
+                }                
             }
+
             else
             {
-                Console.WriteLine("Processo cancelado pelo usuário!");
-                return null;
+                Console.WriteLine("Processo cancelado pelo usuário!");                
             }
 
         }
