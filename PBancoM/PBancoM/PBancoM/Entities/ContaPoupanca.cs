@@ -14,7 +14,7 @@ namespace PBancoM.Entities
         {
             SaldoCP = saldoCP;
         }
-        void AdicionarRendimento()
+        public void AdicionarRendimento()
         {
             double adicao = 0;
             Console.Write("Estamos verificando seu rendimento, aguarde!");

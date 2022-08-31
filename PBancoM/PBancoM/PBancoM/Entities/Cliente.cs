@@ -16,6 +16,7 @@ namespace PBancoM.Entities
         public double Renda { get; set; }
         public ContaCorrente ContaCorrente { get; set; }
         public ContaPoupanca ContaPoupanca { get; set; }
+        public Cartao Cartao { get; set; }
 
         public Cliente()
         {
@@ -59,8 +60,32 @@ namespace PBancoM.Entities
 
             gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
         }
-        void DesbloquearCartao()
+        public Cartao DesbloquearCartao(Cliente[] cliente, Cartao[] cartaoCCorrente, int contCliente)
         {
+            Console.Clear();
+            Console.WriteLine("Olá, Sr.(a) cliente\n");
+            Console.WriteLine("Deseja desbloquear seu cartão? (s/n)");
+            char resposta = char.Parse(Console.ReadLine().ToLower());
+
+            if (resposta == 's')
+            {
+                if (cliente[contCliente].Cartao == null)
+                {
+                    return cliente[contCliente].Cartao = new Cartao(1000, 30);
+                }
+
+                else
+                {
+                    Console.WriteLine("Cliente já possue um cartão criado!");
+                    Console.WriteLine(cliente[contCliente].Cartao);
+                    return null;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Processo cancelado pelo usuário!");
+                return null;
+            }
 
         }
         public override string ToString()

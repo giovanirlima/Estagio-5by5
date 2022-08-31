@@ -19,6 +19,7 @@ namespace PBancoM
             Agencia[] agencias = new Agencia[10];
             ContaCorrente[] contasCorrentes = new ContaCorrente[10];
             ContaPoupanca[] contasPoupancas = new ContaPoupanca[10];
+            Cartao[] cartaoCCorrente = new Cartao[10];
 
 
             do
@@ -99,7 +100,8 @@ namespace PBancoM
                             Console.WriteLine("");
                             Console.WriteLine("1 - Solicitar abertura de conta");
                             Console.WriteLine("2 - Desbloquear cartão");
-                            Console.WriteLine("3 - Ir para o página de usúario menu >");
+                            Console.WriteLine("3 - Acessar sua conta");
+                            Console.WriteLine("4 - Ir para o página de usúario menu >");
                             Console.WriteLine();
                             Console.WriteLine("0 - Voltar para o menu anterior");
                             try
@@ -147,8 +149,8 @@ namespace PBancoM
                                 default:
                                     Console.WriteLine("Opção inválida!");
                                     break;
-                                    
-                                    
+
+
 
                             }
 
@@ -175,7 +177,7 @@ namespace PBancoM
             } while (opc != 0);
 
 
-            
+
 
 
 
