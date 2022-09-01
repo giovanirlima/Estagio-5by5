@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace PPilha.Entities
 {
-    public class Stack
+    public class PilhaDeLivros
     {
-        public Book TOPO { get; set; }
+        public Livro TOPO { get; set; }
 
-        public Stack()
+        public PilhaDeLivros()
         {
             TOPO = null;
-            Console.WriteLine("Pilha criada com sucesso");
+            // Console.WriteLine("Pilha criada com sucesso");
         }
 
-        public void Push(Book aux)
+        public int Push(Livro aux, int contador)
         {
+            contador++;
             if (Vazia())
             {
                 TOPO = aux;
@@ -27,6 +28,7 @@ namespace PPilha.Entities
                 aux.Anterior = TOPO;
                 TOPO = aux;
             }
+            return contador;
         }
 
         private bool Vazia()
@@ -50,7 +52,7 @@ namespace PPilha.Entities
 
             else
             {
-                Book aux = TOPO;
+                Livro aux = TOPO;
                 do
                 {
                     Console.WriteLine(aux.ToString());
@@ -60,7 +62,7 @@ namespace PPilha.Entities
                 } while (aux != null);
 
                 Console.WriteLine("FIM DA IMPRESSÃO");
-                
+
             }
         }
 
@@ -78,6 +80,37 @@ namespace PPilha.Entities
 
         }
 
+        public void LocalizarLivro(string titulo)
+        {
+            bool validacao = false;
 
+            if (Vazia())
+            {
+                Console.WriteLine("Stack vazio");
+            }
+
+            else
+            {
+                Livro aux = TOPO;
+                do
+                {
+                    if (aux.Titulo == titulo)
+                    {
+                        Console.WriteLine("Livro localizado!");
+                        validacao = true;
+                    }
+                    
+                    aux = aux.Anterior;
+
+                } while (aux != null);
+
+                if (!validacao)
+                {
+                    Console.WriteLine("Livro não localizado!");
+                }
+                
+
+            }
+        }
     }
 }

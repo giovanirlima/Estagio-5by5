@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace PPilha.Entities
 {
-    public class Book
+    public class Livro
     {
         public string Titulo { get; set; }
         public int ISBN { get; set; }
         public string Autor { get; set; }
-        public Book Anterior { get; set; }
+        public Livro Anterior { get; set; }
 
-        public Book()
+        public Livro()
         {
         }
 
-        public Book(string titulo, int iSBN, string autor)
+        public Livro(string titulo, int iSBN, string autor)
         {
             Titulo = titulo;
             ISBN = iSBN;
