@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PBancoM.Entities
@@ -54,13 +55,47 @@ namespace PBancoM.Entities
         }
         public void SolicitarEmprestimo(Cliente[] cliente, int contCliente)
         {
+            int id;
+            bool validacao;
             Gerente gerente = new Gerente();
 
-            Console.WriteLine($"Olá sr.(a) {cliente[contCliente].Nome}");
-            Console.WriteLine("Informe o valor que deseja solicitar: ");
-            double emprestimo = double.Parse(Console.ReadLine());
+            do
+            {
+                Console.Write("Informe o ID da conta: ");
+                id = int.Parse(Console.ReadLine());
+                validacao = false;
 
-            gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
+                for (int i = 0; i < contCliente; i++)
+                {
+                    if (cliente[i].ContaCorrente.Id == id)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"Olá sr.(a) {cliente[i].Nome}");
+                        Console.WriteLine("Informe o valor que deseja solicitar: ");
+                        double emprestimo = double.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Solicitação sendo encaminhada para aprovação!");
+                        Console.WriteLine("Aguarde . . .");
+                        Thread.Sleep(2000);
+
+                        gerente.AprovarEmprestimo(cliente, i, emprestimo);
+                        validacao = false;
+                    }
+
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Id informado é inválido!\n");
+                        validacao = true;
+                    }
+                }
+
+            } while (validacao);
+
+
+
+
+
         }
         public void DesbloquearCartao(Cliente[] cliente, int contCliente)
         {

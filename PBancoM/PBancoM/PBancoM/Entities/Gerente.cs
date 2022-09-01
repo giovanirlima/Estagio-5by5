@@ -169,14 +169,16 @@ namespace PBancoM.Entities
             return agencia[contAgencia] = new Agencia(id, endereco.CadastrarEndereco());
 
         }
-        public bool AprovarEmprestimo(Cliente[] cliente, int contCliente, double emprestimo)
+        public bool AprovarEmprestimo(Cliente[] cliente, int i, double emprestimo)
         {
             bool validacao = false;
 
+            Console.Clear();
+
             Console.WriteLine("olá sr.(a) Gerente!");
-            Console.WriteLine("Pedido de empréstimo para aprovação");
-            Console.WriteLine($"Nome: {cliente[contCliente].Nome}");
-            Console.WriteLine($"Renda: {cliente[contCliente].Renda}");
+            Console.WriteLine("\nPedido de empréstimo para aprovação");
+            Console.WriteLine($"Nome: {cliente[i].Nome}");
+            Console.WriteLine($"Renda: {cliente[i].Renda}");
             Console.WriteLine($"Valor solicitado: {emprestimo.ToString("F2")}");
             Console.WriteLine();
             do

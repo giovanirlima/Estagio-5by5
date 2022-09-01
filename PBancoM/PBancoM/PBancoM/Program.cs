@@ -157,8 +157,8 @@ namespace PBancoM
                             Console.WriteLine("Olá usúario, Infome a opção desejada: \n");
                             Console.WriteLine("1 - Solicitar abertura de conta");
                             Console.WriteLine("2 - Desbloquear cartão");
-                            Console.WriteLine("3 - Acessar sua conta");
-                            Console.WriteLine("4 - Ir para o página de usúario menu >");
+                            Console.WriteLine("3 - Solicitar empréstimo");
+                            Console.WriteLine("4 - Acessar sua conta");
                             Console.WriteLine();
                             Console.WriteLine("5 - Voltar ao menu anterior");
                             Console.Write("\nOpção: ");
@@ -200,7 +200,8 @@ namespace PBancoM
                                     break;
 
                                 case 3:
-
+                                    Console.Clear();
+                                    c.SolicitarEmprestimo(clientes, contCliente);
                                     break;
 
                                 case 4:
