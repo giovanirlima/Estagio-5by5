@@ -13,6 +13,7 @@ namespace PBancoM.Entities
         public Agencia Agencia { get; set; }
         public double Saldo { get; set; }
         public double ChequeEspecial { get; set; }
+        Pagamento Registro { get; set; }
 
         public ContaCorrente()
         {
@@ -33,17 +34,18 @@ namespace PBancoM.Entities
             Saldo = saldo;
             ChequeEspecial = chequeEspecial;
         }
-
-        public virtual void SaldoBancario()
+        
+        public void SaldoBancario()
         {
             Console.WriteLine($"Saldo em conta é {Saldo}");
         }
-        public void SaqueBancario()
+        public void SaqueBancario(Pagamento[] registro)
         {
             Console.Write("Informe o valor do saque: ");
             double saque = double.Parse(Console.ReadLine());
 
             Saldo -= saque;
+
 
             Console.WriteLine("Saque efetuado com sucesso!");
         }
@@ -101,6 +103,7 @@ namespace PBancoM.Entities
         }
         void ImprimirExtrato()
         {
+            
         }
         public void PagamentoDeContas()
         {
@@ -113,8 +116,9 @@ namespace PBancoM.Entities
 
             Console.WriteLine("Pagamento efetuado com sucesso!");
         }
-        void RegistrarTransacao()
+        void RegistrarTransacao(ContaCorrente[] conta, int contCliente)
         {
+            
         }
         public void AdicionarChequeEspecial()
         {

@@ -23,14 +23,15 @@ namespace PBancoM.Entities
 
         public Cartao(int id, double limite, int vencimento) : base(id)
         {
+            this.Id = id;
             Limite = limite;
             Vencimento = vencimento;
         }
 
-        public Cartao(int id, Agencia agencia) : base(id, agencia)
+      /*  public Cartao(int id, Agencia agencia) : base(id, agencia)
         {
         }
-
+      */
         void Extrato()
         {
         }

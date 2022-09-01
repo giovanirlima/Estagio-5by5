@@ -97,12 +97,12 @@ namespace PBancoM.Entities
                             Console.ReadKey();
                         }
                     }
-                }                
+                }
             }
 
             else
             {
-                Console.WriteLine("Processo cancelado pelo usuário!");                
+                Console.WriteLine("Processo cancelado pelo usuário!");
             }
 
         }
