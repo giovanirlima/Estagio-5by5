@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace PBancoM.Entities
 {
@@ -73,9 +72,10 @@ namespace PBancoM.Entities
 
             Console.WriteLine("\nFuncionário cadastrado com sucesso!");
 
-            Thread.Sleep(2000);
+            Console.WriteLine("\nPressione Enter para continuar!");
+            Console.ReadKey();
 
-            return gerente[contGerente] = new Gerente(nome, matricula, agencias[idAgencia]);
+            return gerente[contGerente] = new Gerente(nome, matricula, agencias[idAgencia-1]);
 
         }
         public Funcionario CadastrarFuncionario(Funcionario[] funcionario, Gerente[] gerente, Agencia[] agencias, int contFuncionario, int contGerente, int contAgencia)
@@ -133,9 +133,10 @@ namespace PBancoM.Entities
 
             Console.WriteLine("\nFuncionário cadastrado com sucesso!");
 
-            Thread.Sleep(2000);
+            Console.WriteLine("\nPressione Enter para continuar!");
+            Console.ReadKey();
 
-            return funcionario[contFuncionario] = new Funcionario(nome, matricula, agencias[idAgencia]);
+            return funcionario[contFuncionario] = new Funcionario(nome, matricula, agencias[idAgencia-1]);
 
         }
         public Agencia CadastrarAgencia(Agencia[] agencia, int contAgencia)
@@ -178,17 +179,18 @@ namespace PBancoM.Entities
             Console.WriteLine("olá sr.(a) Gerente!");
             Console.WriteLine("\nPedido de empréstimo para aprovação");
             Console.WriteLine($"Nome: {cliente[i].Nome}");
-            Console.WriteLine($"Renda: {cliente[i].Renda}");
-            Console.WriteLine($"Valor solicitado: {emprestimo.ToString("F2")}");
+            Console.WriteLine($"Renda: R$ {cliente[i].Renda}");
+            Console.WriteLine($"Valor solicitado: R$ {emprestimo.ToString("F2")}");
             Console.WriteLine();
             do
             {
                 Console.WriteLine("1 - Aprovar\n2 - Recusar");
+                Console.Write("\nOpção: ");
                 int resposta = int.Parse(Console.ReadLine());
                 validacao = false;
 
 
-                if (resposta != 1 || resposta != 2)
+                if (resposta != 1 && resposta != 2)
                 {
                     Console.WriteLine("Opção escolhida é inexistente!");
                     Console.WriteLine("Escolha 1 ou 2");
@@ -199,14 +201,12 @@ namespace PBancoM.Entities
                 else
                 {
                     if (resposta == 1)
-                    {
-                        Console.WriteLine("Pedido de empréstimo aprovado");
+                    {                        
                         return true;
                     }
                     else
-                    {
-                        Console.WriteLine("Pedido de empréstimo reprovado");
-                        return false;
+                    {                        
+                        return false;                        
                     }
                 }
             } while (validacao);
@@ -229,7 +229,9 @@ namespace PBancoM.Entities
             {
                 Console.WriteLine("\nConta aprovada!");
                 Console.WriteLine("Prossiga com o cadastro!");
-                Thread.Sleep(1000);
+
+                Console.WriteLine("Pressione enter para continuar!");
+                Console.ReadKey();
                 return true;
             }
 

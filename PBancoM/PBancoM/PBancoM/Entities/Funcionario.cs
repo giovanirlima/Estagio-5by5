@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace PBancoM.Entities
 {
@@ -96,7 +95,8 @@ namespace PBancoM.Entities
             {
                 Console.WriteLine("\nRetornando aprovação para o funcionário . . .");
 
-                Thread.Sleep(1500);
+                Console.WriteLine("Pressione enter para continuar!");
+                Console.ReadKey();
 
                 Console.Clear();
 
@@ -129,7 +129,8 @@ namespace PBancoM.Entities
 
                 Console.WriteLine("Conta criada com sucesso!");
 
-                Thread.Sleep(2000);
+                Console.WriteLine("Pressione enter para continuar!");
+                Console.ReadKey();
 
                 return cliente[contCliente] = new Cliente(nome, cpf, nascimento, telefone, endereco, renda, contaCorrente[contCliente], contaPoupanca[contCliente], cartaoCCorrente[contCliente]);
             }

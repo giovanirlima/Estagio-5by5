@@ -39,15 +39,110 @@ namespace PBancoM
 
             return cliente;
         }
+        static int MenuInicial()
+        {
+            int opcao = 0;
+            bool validacao;
+
+            do
+            {
+                Console.WriteLine("BEM-VINDO AO BANCO MORANGAO");
+                Console.WriteLine("\nVocê é um: \n");
+                Console.WriteLine("1 - Funcionario");
+                Console.WriteLine("2 - Cliente");
+                Console.Write("\nOpção: ");
+                try
+                {
+                    opcao = int.Parse(Console.ReadLine());
+                    validacao = false;
+                }
+                catch (System.FormatException)
+                {
+
+                    Console.WriteLine("Opção inválida!");
+                    Console.WriteLine("Escolha uma das opções informadas!");
+                    Console.WriteLine("Pressione uma tecla para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    validacao = true;
+                }
+                if (opcao < 0 || opcao > 6)
+                {
+                    Console.WriteLine("Opção inválida!");
+                    Console.WriteLine("Escolha uma das opções informadas!");
+                    Console.WriteLine("Pressione uma tecla para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    validacao = true;
+                }
+
+            } while (validacao);
+
+            return opcao;
+        }
+        static void MenuFuncionario()
+        {
+
+        }
+        static int MenuGerente()
+        {
+            int opcao = 0;
+            bool validacao;
+
+            do
+            {
+                Console.WriteLine("Olá Gerente, ");
+                Console.WriteLine("\nInfome a opção desejada: \n");
+                Console.WriteLine("1 - Cadastrar Funcionario");
+                Console.WriteLine("2 - Cadastrar Cliente");
+                Console.WriteLine("3 - Cadastrar Agência");
+                Console.WriteLine("4 - Ver Funcionarios cadastrados");
+                Console.WriteLine("5 - Ver Clientes cadastrados");
+                Console.WriteLine("6 - Ver Agências cadastradas");
+                Console.WriteLine("\n0 - Sair");
+
+                try
+                {
+                    opcao = int.Parse(Console.ReadLine());
+                    validacao = false;
+                }
+                catch (System.FormatException)
+                {
+
+                    Console.WriteLine("Opção inválida!");
+                    Console.WriteLine("Escolha uma das opções informadas!");
+                    Console.WriteLine("Pressione uma tecla para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    validacao = true;
+                }
+                if (opcao < 0 || opcao > 6)
+                {
+                    Console.WriteLine("Opção inválida!");
+                    Console.WriteLine("Escolha uma das opções informadas!");
+                    Console.WriteLine("Pressione uma tecla para continuar");
+                    Console.ReadKey();
+                    Console.Clear();
+                    validacao = true;
+                }
+
+            } while (validacao);
+
+            return opcao;
+        }
+        static void MenuCliente()
+        {
+
+        }
+
 
         static void Main(string[] args)
         {
-            int opc = 0, contFuncionario = 3, contGerente = 3, contCliente = 3, contAgencia = 3;
-            bool validacao = false;
+            int opcao = 0, contadorDeFuncionario = 3, contadorDeGerente = 3, contadorDeClientes = 3, contadorDeAgencias = 3, ContadorDePagamentos = 0;
+            bool condicaoDeParada = false;
             char resposta;
 
-            Gerente g = new Gerente();
-            Cliente c = new Cliente();
+            Gerente g = new Gerente(); Cliente c = new Cliente();
             Gerente[] gerentes = new Gerente[10];
             Funcionario[] funcionarios = new Funcionario[10];
             Cliente[] clientes = new Cliente[10];
@@ -77,8 +172,8 @@ namespace PBancoM
                 Console.Write("\nOpção: ");
                 try
                 {
-                    opc = int.Parse(Console.ReadLine());
-                    validacao = false;
+                    opcao = int.Parse(Console.ReadLine());
+                    condicaoDeParada = false;
                 }
                 catch (System.FormatException)
                 {
@@ -88,19 +183,20 @@ namespace PBancoM
                     Console.WriteLine("Pressione uma tecla para continuar");
                     Console.ReadKey();
                     Console.Clear();
-                    validacao = true;
+                    condicaoDeParada = true;
                 }
-                if (opc < 0)
+                if (opcao < 0 || opcao > 7)
                 {
+                    Console.Clear();
                     Console.WriteLine("Opção inválida!");
-                    Console.WriteLine("Escolha uma das opções informadas!");
+                    Console.WriteLine("\nEscolha uma das opções informadas!");
                     Console.WriteLine("Pressione uma tecla para continuar");
                     Console.ReadKey();
                     Console.Clear();
-                    validacao = true;
+                    condicaoDeParada = true;
                 }
 
-                switch (opc)
+                switch (opcao)
                 {
                     case 1:
                         Console.Clear();
@@ -109,45 +205,45 @@ namespace PBancoM
 
                         if (resposta == 'n')
                         {
-                            funcionarios[contFuncionario] = g.CadastrarFuncionario(funcionarios, gerentes, agencias, contFuncionario, contGerente, contAgencia);
-                            contFuncionario++;
+                            funcionarios[contadorDeFuncionario] = g.CadastrarFuncionario(funcionarios, gerentes, agencias, contadorDeFuncionario, contadorDeGerente, contadorDeAgencias);
+                            contadorDeFuncionario++;
                             Console.Clear();
                         }
                         else
                         {
-                            gerentes[contGerente] = g.CadastrarGerente(gerentes, funcionarios, agencias, contGerente, contFuncionario, contAgencia);
-                            contGerente++;
+                            gerentes[contadorDeGerente] = g.CadastrarGerente(gerentes, funcionarios, agencias, contadorDeGerente, contadorDeFuncionario, contadorDeAgencias);
+                            contadorDeGerente++;
                             Console.Clear();
                         }
                         break;
 
                     case 2:
                         Console.Clear();
-                        clientes[contCliente] = g.CadastrarCliente(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contCliente, contAgencia);
-                        contCliente++;
+                        clientes[contadorDeClientes] = g.CadastrarCliente(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contadorDeClientes, contadorDeAgencias);
+                        contadorDeClientes++;
                         Console.Clear();
                         break;
 
                     case 3:
                         Console.Clear();
-                        g.CadastrarAgencia(agencias, contAgencia);
-                        contAgencia++;
+                        g.CadastrarAgencia(agencias, contadorDeAgencias);
+                        contadorDeAgencias++;
                         Console.Clear();
                         break;
 
                     case 4:
                         Console.Clear();
-                        g.VerFuncionariosCadastrados(gerentes, funcionarios, contGerente, contFuncionario);
+                        g.VerFuncionariosCadastrados(gerentes, funcionarios, contadorDeGerente, contadorDeFuncionario);
                         break;
 
                     case 5:
                         Console.Clear();
-                        g.VerClientesCadastrados(clientes, contCliente);
+                        g.VerClientesCadastrados(clientes, contadorDeClientes);
                         break;
 
                     case 6:
                         Console.Clear();
-                        g.VerAgenciasCadastradas(agencias, contAgencia);
+                        g.VerAgenciasCadastradas(agencias, contadorDeAgencias);
                         break;
 
                     case 7:
@@ -164,8 +260,8 @@ namespace PBancoM
                             Console.Write("\nOpção: ");
                             try
                             {
-                                opc = int.Parse(Console.ReadLine());
-                                validacao = false;
+                                opcao = int.Parse(Console.ReadLine());
+                                condicaoDeParada = false;
                             }
                             catch (System.FormatException)
                             {
@@ -175,75 +271,53 @@ namespace PBancoM
                                 Console.WriteLine("Pressione uma tecla para continuar");
                                 Console.ReadKey();
                                 Console.Clear();
-                                validacao = true;
+                                condicaoDeParada = true;
                             }
-                            if (opc < 0 || opc > 9)
+                            if (opcao < 0 || opcao > 9)
                             {
                                 Console.WriteLine("Opção inválida!");
                                 Console.WriteLine("Escolha uma das opções informadas!");
                                 Console.WriteLine("Pressione uma tecla para continuar");
                                 Console.ReadKey();
                                 Console.Clear();
-                                validacao = true;
+                                condicaoDeParada = true;
                             }
 
-                            switch (opc)
+                            switch (opcao)
                             {
                                 case 1:
                                     Console.Clear();
-                                    clientes[contCliente] = c.SolicitarAbertura(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contCliente, contAgencia);
-                                    contCliente++;
+                                    clientes[contadorDeClientes] = c.SolicitarAbertura(clientes, contasCorrentes, contasPoupancas, cartaoCCorrente, agencias, contadorDeClientes, contadorDeAgencias);
+                                    contadorDeClientes++;
                                     break;
 
                                 case 2:
-                                    c.DesbloquearCartao(clientes, contCliente);
+                                    c.DesbloquearCartao(clientes, contadorDeClientes);
                                     break;
 
                                 case 3:
                                     Console.Clear();
-                                    c.SolicitarEmprestimo(clientes, contCliente);
+                                    c.SolicitarEmprestimo(clientes, contadorDeClientes);
                                     break;
 
                                 case 4:
-
+                                    c.AcessarConta(clientes, contadorDeClientes);
                                     break;
-
-                                case 5:
-                                    Console.Clear();
-                                    break;
-
+                                
                                 default:
                                     Console.WriteLine("Opção inválida!");
                                     break;
-
-
-
                             }
 
-
-                        } while (opc != 5);
-
-
-
+                        } while (opcao != 5);
                         break;
 
-
-
-
-
-                    case 8:
+                    default:
+                        Console.WriteLine("Opção inválida!");
                         break;
-
                 }
 
-            } while (opc != 0);
-
-
-
-
-
-
-
+            } while (opcao != 0);
         }
     }
 }

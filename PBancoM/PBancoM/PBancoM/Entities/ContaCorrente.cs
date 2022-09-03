@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace PBancoM.Entities
 {
@@ -63,8 +62,10 @@ namespace PBancoM.Entities
             Console.WriteLine();
             Console.Write("Informe o valor do empréstimo: ");
             double emprestimo = double.Parse(Console.ReadLine());
+
             Console.WriteLine("Pedido encaminhado ao gerente, aguarde a resposta!");
-            Thread.Sleep(1);
+            Console.WriteLine("Precione enter para continuar!");
+            Console.ReadKey();
 
             bool resposta = gerente.AprovarEmprestimo(cliente, contCliente, emprestimo);
 
@@ -78,7 +79,7 @@ namespace PBancoM.Entities
                 Console.WriteLine("Tente novamente mais tarde!");
             }
         }
-        public void TransferirDinheiro(ContaCorrente[] cCorrente, Cliente[] cliente, int contConta, int contCliente)
+        public void TransferirDinheiro(Cliente[] cliente, int contCliente, Pagamento registro, int contadorDePagamentos)
         {
             Console.Write("Informe o Id da conta que deseja realizar a transfêrencia: ");
             int id = int.Parse(Console.ReadLine());
@@ -140,5 +141,7 @@ namespace PBancoM.Entities
                 ChequeEspecial = ChequeEspecial + (Saldo - 10);
             }
         }
+
+        
     }
 }

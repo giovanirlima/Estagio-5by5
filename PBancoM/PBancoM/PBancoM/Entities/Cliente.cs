@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace PBancoM.Entities
 {
@@ -56,7 +55,7 @@ namespace PBancoM.Entities
         public void SolicitarEmprestimo(Cliente[] cliente, int contCliente)
         {
             int id;
-            bool validacao;
+            bool validacao, verificacaoEmprestimo;
             Gerente gerente = new Gerente();
 
             do
@@ -71,31 +70,39 @@ namespace PBancoM.Entities
                     {
                         Console.Clear();
                         Console.WriteLine($"Olá sr.(a) {cliente[i].Nome}");
-                        Console.WriteLine("Informe o valor que deseja solicitar: ");
+                        Console.Write("\nInforme o valor que deseja solicitar: R$ ");
                         double emprestimo = double.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Solicitação sendo encaminhada para aprovação!");
-                        Console.WriteLine("Aguarde . . .");
-                        Thread.Sleep(2000);
+                        Console.WriteLine("\nSolicitação sendo encaminhada para aprovação!");
+                        Console.WriteLine("Pressione enter para continuar!");
+                        Console.ReadKey();
 
-                        gerente.AprovarEmprestimo(cliente, i, emprestimo);
-                        validacao = false;
-                    }
+                        verificacaoEmprestimo = gerente.AprovarEmprestimo(cliente, i, emprestimo);
 
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Id informado é inválido!\n");
-                        validacao = true;
+                        if (!verificacaoEmprestimo)
+                        {
+                            Console.WriteLine("\nPedido de empréstimo reprovado!");
+                            Console.WriteLine("Tente novamente mais tarde!");
+                            Console.WriteLine("\nPressione enter para continuar!");
+                            Console.ReadKey();
+                            validacao = false;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Pedido de empréstimo aprovado\n");
+                            Console.WriteLine($"Valor de R$ {emprestimo.ToString("F2")} será depositado em sua conta!");
+                            Console.WriteLine("Até mais!");
+                            cliente[i].ContaCorrente.Saldo += emprestimo;
+
+                            Console.WriteLine("\nPressione enter para continuar!");
+                            Console.ReadKey();
+                            validacao = false;
+                        }
                     }
                 }
 
             } while (validacao);
-
-
-
-
-
         }
         public void DesbloquearCartao(Cliente[] cliente, int contCliente)
         {
@@ -139,6 +146,116 @@ namespace PBancoM.Entities
             {
                 Console.WriteLine("Processo cancelado pelo usuário!");
             }
+
+        }
+        public void AcessarConta(Cliente[] cliente, int contCliente, Pagamento[] registro, int contadorDePagamentos)
+        {
+            int id, opcao = 0, posicao = 0;
+            bool validacao = false;
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Olá Sr.(a) Cliente!");
+                Console.Write("\nInforme o id da sua conta: ");
+                id = int.Parse(Console.ReadLine());
+
+                for (int i = 0; i < contCliente; i++)
+                {
+                    if (cliente[i].ContaCorrente.Id == id)
+                    {
+                        validacao = true;
+                        posicao = i;
+                    }
+                }
+                if (!validacao)
+                {
+                    Console.WriteLine("\nId inválido!");
+                    Console.WriteLine("Pressione enter para continuar!");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    do
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"Olá Sr.(a) {cliente[posicao].Nome}\n");
+                        Console.WriteLine("Informe qual Opção deseja\n");
+
+                        Console.WriteLine("1 - Ver saldo da conta");
+                        Console.WriteLine("2 - Sacar dinheiro");
+                        Console.WriteLine("3 - Solicitar Emprestimo");
+                        Console.WriteLine("4 - Transferir dinheiro");
+                        Console.WriteLine("5 - Extrato de movimentação");
+                        Console.WriteLine("6 - Pagar conta");
+                        Console.WriteLine("\n0 - Sair");
+                        Console.Write("\nOpção: ");
+                        try
+                        {
+                            opcao = int.Parse(Console.ReadLine());
+                        }
+                        catch (System.FormatException)
+                        {
+
+                            Console.WriteLine("Opção inválida!");
+                            Console.WriteLine("Escolha uma das opções informadas!");
+                            Console.WriteLine("Pressione uma tecla para continuar");
+                            Console.ReadKey();
+                            Console.Clear();
+
+                        }
+                        if (opcao < 0 || opcao > 6)
+                        {
+                            Console.WriteLine("Opção inválida!");
+                            Console.WriteLine("Escolha uma das opções informadas!");
+                            Console.WriteLine("Pressione uma tecla para continuar");
+                            Console.ReadKey();
+                            Console.Clear();
+                        }
+
+                        switch (opcao)
+                        {
+                            case 1:
+                                cliente[posicao].ContaCorrente.SaldoBancario();
+                                break;
+
+                            case 2:
+                                cliente[posicao].ContaCorrente.SaqueBancario(registro);
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            case 4:
+                                cliente[posicao].ContaCorrente.TransferirDinheiro(cliente, contCliente, registro, ContadorDePagamentos);
+                                break;
+                                
+                            case 5:
+
+                                break;
+
+                            case 6:
+
+                                break;
+
+                            case 0:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+
+
+
+                    } while (opcao != 0);
+
+                }
+
+            } while (true);
+
+
 
         }
         public override string ToString()
