@@ -12,7 +12,7 @@ namespace PBancoM.Entities
         public Agencia Agencia { get; set; }
         public double Saldo { get; set; }
         public double ChequeEspecial { get; set; }
-        Pagamento Registro { get; set; }
+        public Pagamento Registro { get; set; }
 
         public ContaCorrente()
         {
@@ -33,7 +33,7 @@ namespace PBancoM.Entities
             Saldo = saldo;
             ChequeEspecial = chequeEspecial;
         }
-        
+
         public void SaldoBancario()
         {
             Console.WriteLine($"Saldo em conta é {Saldo}");
@@ -79,21 +79,22 @@ namespace PBancoM.Entities
                 Console.WriteLine("Tente novamente mais tarde!");
             }
         }
-        public void TransferirDinheiro(Cliente[] cliente, int contCliente, Pagamento registro, int contadorDePagamentos)
+        public void TransferirDinheiro(Cliente[] cliente, int contCliente, Pagamento[] registro, int contadorDePagamentos, int posicao)
         {
+            Console.Clear();
             Console.Write("Informe o Id da conta que deseja realizar a transfêrencia: ");
             int id = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < contConta; i++)
+            for (int i = 0; i < contCliente; i++)
             {
-                if (cCorrente[i].Id == id)
+                if (cliente[i].ContaCorrente.Id == id)
                 {
                     Console.WriteLine("Informe o valor que deseja transferir: ");
                     double transferencia = double.Parse(Console.ReadLine());
 
-                    cCorrente[contConta].Saldo -= transferencia;
-                    cCorrente[i].Saldo += transferencia;
-
+                    cliente[posicao].ContaCorrente.Saldo -= transferencia;
+                    cliente[posicao].ContaCorrente.Registro = new Pagamento(new DateTime(24 / 03 / 1994), "Transfêrencia", transferencia);
+                    cliente[i].ContaCorrente.Saldo += transferencia;
                     Console.WriteLine($"Transferência enviada para {cliente[i].Nome}");
                 }
                 else
@@ -104,7 +105,7 @@ namespace PBancoM.Entities
         }
         void ImprimirExtrato()
         {
-            
+
         }
         public void PagamentoDeContas()
         {
@@ -119,7 +120,7 @@ namespace PBancoM.Entities
         }
         void RegistrarTransacao(ContaCorrente[] conta, int contCliente)
         {
-            
+
         }
         public void AdicionarChequeEspecial()
         {
@@ -142,6 +143,6 @@ namespace PBancoM.Entities
             }
         }
 
-        
+
     }
 }

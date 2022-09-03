@@ -228,7 +228,7 @@ namespace PBancoM.Entities
                                 break;
 
                             case 4:
-                                cliente[posicao].ContaCorrente.TransferirDinheiro(cliente, contCliente, registro, ContadorDePagamentos);
+                                cliente[posicao].ContaCorrente.TransferirDinheiro(cliente, contCliente, registro, contadorDePagamentos, posicao);
                                 break;
                                 
                             case 5:
