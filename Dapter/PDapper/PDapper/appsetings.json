@@ -1,0 +1,6 @@
+{
+    "ConnectionStrings": {
+        "DefaultConnection": "Data Source = localhost; Initial Catalog = ClienteDB; User Id = sa; Password = 227126993"
+    }
+   
+}
