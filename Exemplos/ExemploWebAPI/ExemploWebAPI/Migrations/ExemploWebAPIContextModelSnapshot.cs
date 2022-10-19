@@ -32,13 +32,10 @@ namespace ExemploWebAPI.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdPerson")
-                        .HasColumnType("int");
-
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PersonId")
+                    b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -77,9 +74,13 @@ namespace ExemploWebAPI.Migrations
 
             modelBuilder.Entity("ExemploWebAPI.Models.Address", b =>
                 {
-                    b.HasOne("ExemploWebAPI.Models.Person", null)
+                    b.HasOne("ExemploWebAPI.Models.Person", "Person")
                         .WithMany("Address")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("ExemploWebAPI.Models.Person", b =>

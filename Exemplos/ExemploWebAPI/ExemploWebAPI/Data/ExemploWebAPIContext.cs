@@ -9,11 +9,9 @@ namespace ExemploWebAPI.Data
 {
     public class ExemploWebAPIContext : DbContext
     {
-        public ExemploWebAPIContext (DbContextOptions<ExemploWebAPIContext> options)
-            : base(options)
+        public ExemploWebAPIContext (DbContextOptions<ExemploWebAPIContext> options) : base(options)
         {
         }
-
         public DbSet<ExemploWebAPI.Models.Person> Person { get; set; }
 
         public DbSet<ExemploWebAPI.Models.Address> Address { get; set; }

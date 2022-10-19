@@ -12,7 +12,8 @@ namespace ExemploWebAPI.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        [ForeignKey("Person")]
-        public int IdPerson { get; set; }        
+       
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
     }
 }

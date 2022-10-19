@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExemploWebAPI.Migrations
 {
     [DbContext(typeof(ExemploWebAPIContext))]
-    [Migration("20221017180411_Relation1xM")]
-    partial class Relation1xM
+    [Migration("20221017202339_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace ExemploWebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AddressPerson", b =>
-                {
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AddressId", "PersonId");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("AddressPerson");
-                });
 
             modelBuilder.Entity("ExemploWebAPI.Models.Address", b =>
                 {
@@ -49,10 +34,10 @@ namespace ExemploWebAPI.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdPerson")
+                    b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("Number")
+                    b.Property<int>("PersonId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
@@ -62,6 +47,8 @@ namespace ExemploWebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Address");
                 });
@@ -87,19 +74,20 @@ namespace ExemploWebAPI.Migrations
                     b.ToTable("Person");
                 });
 
-            modelBuilder.Entity("AddressPerson", b =>
+            modelBuilder.Entity("ExemploWebAPI.Models.Address", b =>
                 {
-                    b.HasOne("ExemploWebAPI.Models.Address", null)
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ExemploWebAPI.Models.Person", null)
-                        .WithMany()
+                    b.HasOne("ExemploWebAPI.Models.Person", "Person")
+                        .WithMany("Address")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("ExemploWebAPI.Models.Person", b =>
+                {
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }
