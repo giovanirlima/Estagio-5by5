@@ -10,10 +10,12 @@ namespace ExemploWebApiMongo.Controllers
     public class ClientController : ControllerBase
     {
         private readonly ClientServices _clientServices;
+        private readonly AddressServices _addressServices;
 
-        public ClientController(ClientServices clientServices)
+        public ClientController(ClientServices clientServices, AddressServices addressServices)
         {
             _clientServices = clientServices;
+            _addressServices = addressServices;
         }
 
         [HttpGet]
@@ -32,9 +34,56 @@ namespace ExemploWebApiMongo.Controllers
             return cliente;
         }
 
+        [HttpGet("ClientAdress/{id:length(24)}", Name = "GetClientAdress")]
+        public ActionResult<Client> GetAddress(string id)
+        {
+            Client c = new();
+            var cliente = _clientServices.Get();
+
+            foreach (var x in cliente)
+            {
+                if (x.Address.Id == id)
+                {
+                    c = x;
+                }
+            }
+
+            if (c == null)
+            {
+                return NotFound();
+            }
+
+            return c;
+        }
+
+        [HttpGet("{id:length(24)}", Name = "GetClient")]
+        public ActionResult<Client> GetClient(string nome)
+        {
+            var c = new Client();
+            var cliente = _clientServices.Get();
+
+            foreach (var x in cliente)
+            {
+                if (x.Nome == nome)
+                {
+                    c = x;
+                }
+            }
+
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            return c;
+        }
+
         [HttpPost]
         public ActionResult<Client> Create(Client client)
         {
+            Address address = _addressServices.Create(client.Address);
+            client.Address = address;
+
             _clientServices.Create(client);
             return CreatedAtRoute("GetClient", new { id = client.Id.ToString() }, client);
         }

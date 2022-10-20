@@ -2,7 +2,9 @@
 using ExemploWebApiMongo.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ExemploWebApiMongo.Controllers
 {
@@ -11,10 +13,12 @@ namespace ExemploWebApiMongo.Controllers
     public class AddressController : ControllerBase
     {
         private readonly AddressServices _addressServices;
+        private readonly ClientServices _clientServices;
 
-        public AddressController(AddressServices addressServices)
+        public AddressController(AddressServices addressServices, ClientServices clientServices)
         {
             _addressServices = addressServices;
+            _clientServices = clientServices;
         }
 
         [HttpGet]
@@ -22,14 +26,13 @@ namespace ExemploWebApiMongo.Controllers
 
         [HttpGet("{id:length(24)}", Name = "GetAddress")]
         public ActionResult<Address> Get(string id)
-        {
+        {            
             var address = _addressServices.Get(id);
 
             if (address == null)
             {
                 return NotFound();
             }
-
             return address;
         }
 

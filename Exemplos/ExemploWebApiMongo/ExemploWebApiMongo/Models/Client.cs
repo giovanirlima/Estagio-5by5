@@ -8,6 +8,7 @@ namespace ExemploWebApiMongo.Models
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
         public string Nome { get; set; }
+        public Address Address { get; set; }
 
     }
 }
